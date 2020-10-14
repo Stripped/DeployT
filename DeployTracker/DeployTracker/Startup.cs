@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DeployTracker.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -18,6 +19,8 @@ namespace DeployTracker
         {
             services.AddMvc();
             services.AddLogging();
+            services.AddSingleton<ICounter, Counter>();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -34,6 +37,7 @@ namespace DeployTracker
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
+            
 
             app.UseRouting();
 
@@ -44,6 +48,8 @@ namespace DeployTracker
                     await context.Response.WriteAsync("Hello World!");
                 });
             });
+
+            app.UseRouting();
         }
     }
 }
