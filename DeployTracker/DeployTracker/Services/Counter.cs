@@ -5,11 +5,6 @@ using System.Threading.Tasks;
 
 namespace DeployTracker.Services
 {
-    public interface ICounter
-    {
-        void Increment();
-        int GetValue();
-    }
     public class Counter : ICounter
     {
         private int _counter = 0;
