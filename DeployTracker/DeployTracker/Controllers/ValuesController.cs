@@ -5,6 +5,8 @@ using System.Threading.Tasks;
 using DeployTracker.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using DeployTracker.Services;
+using Microsoft.Extensions.Logging;
 
 namespace DeployTracker.Controllers
 {
@@ -12,32 +14,17 @@ namespace DeployTracker.Controllers
     [ApiController]
     public class ValuesController : ControllerBase
     {
+        private readonly ILogger<HomeController> _logger;
+        public ValuesController(ILogger<HomeController> logger)
+        {
+            _logger = logger;
+        }
         [HttpPost]
-        [Route("api/Compute")]
+        [Route("Compute")]
         public IActionResult Compute([FromBody] MathTask task) 
         {
-            double result=0;
-            switch (task.Operation)
-            {
-                case MathOperation.Add:
-                    result = task.LeftHandOperand + task.RightHandOperand;
-                    break;
-                case MathOperation.Subtract:
-                    result = task.LeftHandOperand - task.RightHandOperand;
-                    break;
-                case MathOperation.Multiply:
-                    result = task.LeftHandOperand * task.RightHandOperand;
-                    break;
-                case MathOperation.Divide:
-                    result = task.LeftHandOperand / task.RightHandOperand;
-                    break;
-                default:
-                    break;
-            }
-            var response = new MathTaskResult // готовим возвращаемую модельку
-            {
-                Result = result
-            };
+            MathTaskResult response = new MathService().Evaluate(task); // сервисом обработали полученный объект
+            _logger.LogInformation(response.Result.ToString());
             return Ok(response); // возвращаем успешный ответ (код 200 OK) с нашей моделькой
         }
     }

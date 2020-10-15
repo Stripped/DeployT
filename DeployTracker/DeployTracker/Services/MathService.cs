@@ -10,18 +10,26 @@ namespace DeployTracker.Services
 {
     public class MathService: IMathService
     {
-        public string ResultText { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public double ResultDouble { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public MathService()
+        public MathTaskResult Evaluate(MathTask task)
         {
-            ResultText = "result";
-            ResultDouble = new MathTaskResult().Result;
-        }
-
-        public string GetValue()
-        {
-            MathService mathService = new MathService();
-            var result = JsonConvert.SerializeObject(mathService);
+            var result = new MathTaskResult();
+            switch (task.Operation)
+            {
+                case MathOperation.Add:
+                    result.Result = task.LeftHandOperand + task.RightHandOperand;
+                    break;
+                case MathOperation.Subtract:
+                    result.Result = task.LeftHandOperand - task.RightHandOperand;
+                    break;
+                case MathOperation.Multiply:
+                    result.Result = task.LeftHandOperand * task.RightHandOperand;
+                    break;
+                case MathOperation.Divide:
+                    result.Result = task.LeftHandOperand / task.RightHandOperand;
+                    break;
+                default:
+                    break;
+            }
             return result;
         }
 

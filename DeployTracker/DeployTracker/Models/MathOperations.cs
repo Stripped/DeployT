@@ -16,7 +16,7 @@ namespace DeployTracker.Models
     }
     public class MathTask
     {
-        [Newtonsoft.Json.JsonConverter(typeof(JsonStringEnumConverter))] // зачем оно нужно? :)
+        [System.Text.Json.Serialization.JsonConverter(typeof(JsonStringEnumConverter))] // зачем оно нужно? :)
         public MathOperation Operation { get; set; }
         public double LeftHandOperand { get; set; }
         public double RightHandOperand { get; set; }

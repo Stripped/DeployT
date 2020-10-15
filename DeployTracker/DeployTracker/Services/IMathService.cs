@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using DeployTracker.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,9 +9,6 @@ namespace DeployTracker.Services
 {
     interface IMathService
     {
-        public string ResultText { get;set; }
-        public double ResultDouble { get;set; }
-
-        public string GetValue();
+        MathTaskResult Evaluate(MathTask task);
     }
 }
