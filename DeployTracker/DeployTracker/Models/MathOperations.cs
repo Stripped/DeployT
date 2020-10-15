@@ -32,25 +32,5 @@ namespace DeployTracker.Models
     {
         public double Result { get; set; }
 
-        public MathTaskResult(MathTask mathTask)
-        {
-            switch (mathTask.Operation)
-            {
-                case MathOperation.Add:
-                    Result = mathTask.LeftHandOperand + mathTask.RightHandOperand;
-                    break;
-                case MathOperation.Subtract:
-                    Result = mathTask.LeftHandOperand - mathTask.RightHandOperand;
-                    break;
-                case MathOperation.Multiply:
-                    Result = mathTask.LeftHandOperand * mathTask.RightHandOperand;
-                    break;
-                case MathOperation.Divide:
-                    Result = mathTask.LeftHandOperand / mathTask.RightHandOperand;
-                    break;
-                default:
-                    break;
-            }
-        }
     }
 }

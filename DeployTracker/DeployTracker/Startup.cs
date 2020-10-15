@@ -20,7 +20,10 @@ namespace DeployTracker
         {
             services.AddMvc();
             services.AddLogging();
+            services.AddControllers();
             services.AddSingleton<ICounter, Counter>();
+            services.AddScoped<IMathService, MathService>();
+
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -30,7 +33,6 @@ namespace DeployTracker
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(

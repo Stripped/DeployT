@@ -13,12 +13,32 @@ namespace DeployTracker.Controllers
     public class ValuesController : ControllerBase
     {
         [HttpPost]
-        [Route("api/Calculate")]
-        public double JsonDataPost([FromBody] MathTask content)
+        [Route("api/Compute")]
+        public IActionResult Compute([FromBody] MathTask task) 
         {
-           var mathTaskObj = new MathTask(content.Operation, content.LeftHandOperand, content.RightHandOperand);
-           var mathTaskResult = new MathTaskResult(mathTaskObj);
-           return mathTaskResult.Result;
+            double result=0;
+            switch (task.Operation)
+            {
+                case MathOperation.Add:
+                    result = task.LeftHandOperand + task.RightHandOperand;
+                    break;
+                case MathOperation.Subtract:
+                    result = task.LeftHandOperand - task.RightHandOperand;
+                    break;
+                case MathOperation.Multiply:
+                    result = task.LeftHandOperand * task.RightHandOperand;
+                    break;
+                case MathOperation.Divide:
+                    result = task.LeftHandOperand / task.RightHandOperand;
+                    break;
+                default:
+                    break;
+            }
+            var response = new MathTaskResult // готовим возвращаемую модельку
+            {
+                Result = result
+            };
+            return Ok(response); // возвращаем успешный ответ (код 200 OK) с нашей моделькой
         }
     }
 
