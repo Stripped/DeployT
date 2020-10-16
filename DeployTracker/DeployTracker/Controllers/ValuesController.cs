@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DeployTracker.Models;
-using Microsoft.AspNetCore.Http;
+﻿using DeployTracker.Models;
 using Microsoft.AspNetCore.Mvc;
-using DeployTracker.Services;
+using DeployTracker.Services.Contracts;
 using Microsoft.Extensions.Logging;
 
 namespace DeployTracker.Controllers
@@ -15,17 +10,23 @@ namespace DeployTracker.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
-        public ValuesController(ILogger<HomeController> logger)
+        private readonly IMathService _mathService;
+        
+        public ValuesController(ILogger<HomeController> logger, 
+            IMathService mathService)
         {
             _logger = logger;
+            _mathService = mathService;
         }
+
         [HttpPost]
-        [Route("Compute")]
+        [Route(nameof(Compute))]
         public IActionResult Compute([FromBody] MathTask task) 
         {
-            MathTaskResult response = new MathService().Evaluate(task); // сервисом обработали полученный объект
-            _logger.LogInformation(response.Result.ToString());
-            return Ok(response); // возвращаем успешный ответ (код 200 OK) с нашей моделькой
+            var result = _mathService.Evaluate(task);
+            _logger.LogInformation($"The operation was {task.Operation} with operands {task.LeftHandOperand} and {task.RightHandOperand}, " +
+                                   $"the result was {result.Result}.");
+            return Ok(result);
         }
     }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DeployTracker.Services;
-using Microsoft.AspNetCore.Http;
+﻿using DeployTracker.Services.Contracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -18,6 +13,7 @@ namespace DeployTracker.Controllers
             _logger = logger;
             _counter = counter;
         }
+
         public ActionResult Index()
         {
             _logger.LogInformation("Index action called!");

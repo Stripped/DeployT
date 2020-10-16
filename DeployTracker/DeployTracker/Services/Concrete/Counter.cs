@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using DeployTracker.Services.Contracts;
 
-namespace DeployTracker.Services
+namespace DeployTracker.Services.Concrete
 {
     public class Counter : ICounter
     {
