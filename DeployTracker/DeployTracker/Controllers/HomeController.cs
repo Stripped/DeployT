@@ -8,7 +8,7 @@ namespace DeployTracker.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         private readonly ICounter _counter;
-        public HomeController(ILogger<HomeController> logger,ICounter counter)
+        public HomeController(ILogger<HomeController> logger, ICounter counter)
         {
             _logger = logger;
             _counter = counter;
