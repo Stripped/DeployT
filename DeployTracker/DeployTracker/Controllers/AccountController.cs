@@ -22,28 +22,11 @@ namespace DeployTracker.Controllers
         {
             _authOptions = authOptions;
         }
-        // тестовые данные вместо использования базы данных
-        private List<User> people = new List<User>
-        {
-            new User {Login="admin@gmail.com", Password="12345", Role = "admin" },
-            new User { Login="qwerty@gmail.com", Password="55555", Role = "user" }
-        };
- 
+
         [HttpPost]
         [Route(nameof(Login))]
         public IActionResult Login(LoginUserData loginUserData)
         {
-            var identity = GetIdentity(loginUserData.Login, loginUserData.Password);
-            var now = DateTime.UtcNow;
-            // создаем JWT-токен
-            var jwt = new JwtSecurityToken(
-                    issuer: AuthOptions.ISSUER,
-                    audience: AuthOptions.AUDIENCE,
-                    notBefore: now,
-                    claims: identity.Claims,
-                    expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(_authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
-            var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
             TokenResponse response;
             if (identity!=null)
             {
@@ -66,25 +49,6 @@ namespace DeployTracker.Controllers
             return Json(response);
         }
 
-        private ClaimsIdentity GetIdentity(string username, string password)
-        {
-            User User = people.FirstOrDefault(x => x.Login == username && x.Password == password);
-            if (User != null)
-            {
-                var claims = new List<Claim>
-                {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, User.Login),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, User.Role)
-                };
-                ClaimsIdentity claimsIdentity =
-                new ClaimsIdentity(claims, "Token", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-                return claimsIdentity;
-            }
-
-            // если пользователя не найдено
-            return null;
-        }
 
         [Authorize]
         [Route("SecretArea/GetData")]
