@@ -21,8 +21,6 @@ namespace DeployTracker.Handler
         }
         protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
-            // здесь есть доступ к Request, в т.ч. к Request.Headers, в которых
-            // может передаваться токен
             if (Request.Headers["MyJwtAuthHeader"].ToString()!=null)
             {
                 return Task.FromResult(AuthenticateResult.Fail("Wrong password? :( "));
