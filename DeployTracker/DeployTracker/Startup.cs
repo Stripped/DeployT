@@ -1,6 +1,6 @@
+using DeployTracker.Services;
 using DeployTracker.Services.Concrete;
 using DeployTracker.Services.Contracts;
-using DeployTracker.TokenApp;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,16 +16,19 @@ namespace DeployTracker
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+             
             services.AddMvc();
             services.AddLogging();
             services.AddSingleton<ICounter, Counter>();
-            services.AddScoped<IMathService, MathService>();
+            services.AddScoped<IMathService, MathService>();           
+            services.AddScoped<IAuthOptions, AuthOptions>();
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                    .AddJwtBearer(options =>
-                    {
-                        options.RequireHttpsMetadata = false;
-                        options.TokenValidationParameters = new TokenValidationParameters
-                        {
+            .AddJwtBearer(options =>
+            {
+             options.RequireHttpsMetadata = false;
+             options.TokenValidationParameters = new TokenValidationParameters
+             {
                             // укзывает, будет ли валидироваться издатель при валидации токена
                             ValidateIssuer = true,
                             // строка, представляющая издателя
@@ -42,9 +45,8 @@ namespace DeployTracker
                             IssuerSigningKey = AuthOptions.GetSymmetricSecurityKey(),
                             // валидация ключа безопасности
                             ValidateIssuerSigningKey = true,
-                        };
-                    });
-
+             };
+             });
         }
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

@@ -11,7 +11,7 @@ namespace DeployTracker.Controllers
     public class ValuesController : ControllerBase
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IMathService _mathService;
+        private  readonly IMathService _mathService;
         
         public ValuesController(ILogger<HomeController> logger, 
             IMathService mathService)
