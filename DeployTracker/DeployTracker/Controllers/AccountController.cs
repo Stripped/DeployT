@@ -17,10 +17,12 @@ namespace DeployTracker.Controllers
     public class AccountController: Controller
     {
         private readonly IAuthOptions _authOptions;
+        private readonly ILoginJWT _loginJWT;
 
-        public AccountController(IAuthOptions authOptions)
+        public AccountController(IAuthOptions authOptions,ILoginJWT loginJWT)
         {
             _authOptions = authOptions;
+            _loginJWT = loginJWT;
         }
 
         [HttpPost]
@@ -28,13 +30,15 @@ namespace DeployTracker.Controllers
         public IActionResult Login(LoginUserData loginUserData)
         {
             TokenResponse response;
-            if (identity!=null)
+            var token = _loginJWT.Login(loginUserData);
+            
+            if (token != null)
             {
                 response = new TokenResponse
                 {
                     Success = true,
                     ErrorMessage = "",
-                    Data = encodedJwt
+                    Data = token
                 };
             }
             else

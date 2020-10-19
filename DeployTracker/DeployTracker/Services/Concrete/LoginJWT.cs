@@ -12,10 +12,16 @@ using System.Threading.Tasks;
 
 namespace DeployTracker.Services.Concrete
 {
-    public class LoginJWT
+    public class LoginJWT:ILoginJWT
     {
-        private readonly IAuthOptions authOptions;
-        private readonly IUserRepository userRepository;
+        private readonly IAuthOptions _authOptions;
+        private readonly IUserRepository _userRepository;
+        
+        public LoginJWT(IAuthOptions authOptions, IUserRepository userRepository)
+        {
+            _authOptions = authOptions;
+            _userRepository = userRepository;
+        }
         public string Login(LoginUserData loginUserData)
         {
             var identity = GetIdentity(loginUserData.Login, loginUserData.Password);
@@ -27,7 +33,7 @@ namespace DeployTracker.Services.Concrete
                     notBefore: now,
                     claims: identity.Claims,
                     expires: now.Add(TimeSpan.FromMinutes(AuthOptions.LIFETIME)),
-                    signingCredentials: new SigningCredentials(authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
+                    signingCredentials: new SigningCredentials(_authOptions.GetSymmetricSecurityKey(), SecurityAlgorithms.HmacSha256));
             var encodedJwt = new JwtSecurityTokenHandler().WriteToken(jwt);
 
             return encodedJwt;
@@ -35,7 +41,7 @@ namespace DeployTracker.Services.Concrete
 
         private ClaimsIdentity GetIdentity(string username, string password)
         {
-            User User = userRepository.GetUserByLoginPassword(username, password);
+            User User = _userRepository.GetUserByLoginPassword(username, password);
             if (User != null)
             {
                 var claims = new List<Claim>

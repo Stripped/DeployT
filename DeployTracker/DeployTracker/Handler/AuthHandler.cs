@@ -37,8 +37,7 @@ namespace DeployTracker.Handler
             }
             var claims = new List<Claim>
         {
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, _userRepository.),
-                    new Claim(ClaimsIdentity.DefaultRoleClaimType, User.Role)
+                    new Claim(ClaimsIdentity.DefaultNameClaimType, Request.Headers["MyJwtAuthHeader"].ToString()),
         };
             // готовим тикет для успешной авторизации
             var identity = new ClaimsIdentity(claims, schemeName);
