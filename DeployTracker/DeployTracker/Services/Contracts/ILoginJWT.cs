@@ -6,8 +6,9 @@ using System.Threading.Tasks;
 
 namespace DeployTracker.Services.Contracts
 {
-    interface ILoginJWT
+    public interface ILoginJWT
     {
         public string Login(LoginUserData loginUserData);
+
     }
 }
