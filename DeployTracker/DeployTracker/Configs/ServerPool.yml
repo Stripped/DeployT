@@ -1,0 +1,10 @@
+serverPool:
+- hostname: host1
+  connectionType: SSH
+  username: user1
+  password: user12
+
+- hostname: host2
+  connectionType: WinRM
+  username: user2
+  password: user21

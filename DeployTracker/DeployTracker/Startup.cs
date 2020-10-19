@@ -27,7 +27,6 @@ namespace DeployTracker
             services.AddScoped<IAuthOptions, AuthOptions>();
             services.AddScoped<ILoginJWT, LoginJWT>();
             services.AddScoped<IUserRepository, UserRepository>();
-
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "MyScheme";
