@@ -12,6 +12,7 @@ using System.Security.Claims;
 
 namespace DeployTracker.Controllers
 {
+    [Authorize(AuthenticationSchemes = "MyScheme")]
     [Route("api/[controller]")]
     [ApiController]
     public class AccountController: Controller

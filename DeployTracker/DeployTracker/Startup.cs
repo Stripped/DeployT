@@ -1,3 +1,4 @@
+using DeployTracker.Database;
 using DeployTracker.Handler;
 using DeployTracker.Services;
 using DeployTracker.Services.Concrete;
@@ -25,6 +26,7 @@ namespace DeployTracker
             services.AddScoped<IMathService, MathService>();           
             services.AddScoped<IAuthOptions, AuthOptions>();
             services.AddScoped<ILoginJWT, LoginJWT>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddAuthentication(options =>
             {

@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace DeployTracker.Database
 {
  
-    public class StubUserRepository : IUserRepository
+    public class UserRepository : IUserRepository
     {
         private static List<User> _users = new List<User>();
-        private readonly ILogger<StubUserRepository> _logger;
-        public StubUserRepository(ILogger<StubUserRepository> logger)
+        private readonly ILogger<UserRepository> _logger;
+        public UserRepository(ILogger<UserRepository> logger)
         {
             List<User> people = new List<User>
             {
