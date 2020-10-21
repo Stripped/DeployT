@@ -27,6 +27,10 @@ namespace DeployTracker
             services.AddScoped<IAuthOptions, AuthOptions>();
             services.AddScoped<ILoginJWT, LoginJWT>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddControllersWithViews()
+    .AddNewtonsoftJson(options =>
+    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = "MyScheme";

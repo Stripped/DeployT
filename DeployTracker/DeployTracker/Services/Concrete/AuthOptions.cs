@@ -19,5 +19,14 @@ namespace DeployTracker.Services.Concrete
         {
             return new SymmetricSecurityKey(Encoding.ASCII.GetBytes(KEY));
         }
+        public TokenValidationParameters GetTokenValidationParameters()
+        {
+            return new TokenValidationParameters()
+            {
+                ValidateIssuer = false,
+                ValidateAudience = false,
+                IssuerSigningKey = GetSymmetricSecurityKey()
+            };
+        }
     }
 }

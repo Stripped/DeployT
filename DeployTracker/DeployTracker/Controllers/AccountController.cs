@@ -53,7 +53,8 @@ namespace DeployTracker.Controllers
         [Route("SecretArea/GetData")]
         public IActionResult GetLogin()
         {
-            return Ok($"Ваш логин: {User.Identity.Name}");
+            var token = Request.Headers["MyJwtAuthHeader"];
+            return Ok(_loginJWT.GetClaims(token));
         }
 
 
