@@ -8,6 +8,6 @@ namespace DeployTracker.Services.Contracts
 {
     public interface IServerAuth
     {
-        public void LoginToServer(ServerPool serverPool);
+        public string LoginToServer(ServerPool serverPool);
     }
 }

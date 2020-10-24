@@ -18,19 +18,18 @@ namespace DeployTracker.Services.Concrete
            
         }
 
-        public void LoginToServer(ServerPool serverPool)
+        public string LoginToServer(ServerPool serverPool)
         {
             switch (serverPool.ConnectionType)
             {
                 case "SSH":
-                    SSHConnection(serverPool.Hostname, serverPool.Port, serverPool.UserName, serverPool.Password);
-                    break;
+                    return SSHConnection(serverPool.Hostname, serverPool.Port, serverPool.UserName, serverPool.Password);
                 default:
-                    break;
+                    return "Connection unsuccesfull";
             }
         }
 
-        private void SSHConnection(string host,int port,string user,string pass)
+        private string SSHConnection(string host,int port,string user,string pass)
         {
             //Set up the SSH connection
             using (var client = new SshClient(host,port, user, pass))
@@ -39,7 +38,7 @@ namespace DeployTracker.Services.Concrete
                 client.Connect();
                 var output = client.RunCommand("echo test");
                 client.Disconnect();
-                Console.WriteLine(output.Result);
+                return output.Result;
             }
         }
 
