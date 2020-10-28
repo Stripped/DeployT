@@ -36,6 +36,7 @@ namespace DeployTracker
             services.AddScoped<IEmailSenderService, EmailSenderService>();
             services.AddScoped<ILoginJWT, LoginJWT>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IServerAuth, ServerAuth>();
             services.AddControllersWithViews()
                 .AddNewtonsoftJson(options =>
                 options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
