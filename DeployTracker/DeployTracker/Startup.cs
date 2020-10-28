@@ -29,9 +29,7 @@ namespace DeployTracker
         {
             services.AddOptions();
             services.AddMvc();
-            services.AddLogging();
-            services.AddSingleton<ICounter, Counter>();
-            services.AddScoped<IMathService, MathService>();           
+            services.AddLogging();  
             services.AddScoped<IAuthOptions, AuthOptions>();
             services.AddScoped<IEmailSenderService, EmailSenderService>();
             services.AddScoped<ILoginJWT, LoginJWT>();
