@@ -1,15 +1,11 @@
-﻿using DeployTracker.Controllers;
-using DeployTracker.Models;
+﻿using DeployTracker.Models;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading.Tasks;
 
 namespace DeployTracker.Database
 {
- 
+
     public class UserRepository : IUserRepository
     {
         private static List<User> _users = new List<User>();

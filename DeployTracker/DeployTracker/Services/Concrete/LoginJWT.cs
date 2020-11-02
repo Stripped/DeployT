@@ -1,29 +1,14 @@
 ﻿using DeployTracker.Database;
 using DeployTracker.Models;
 using DeployTracker.Services.Contracts;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
 using System.Security.Claims;
-using DeployTracker.Services.Concrete;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DeployTracker.Services.Concrete
 {
-    /*
-JWT-токен — это некоторое хранилище, которое можно проверить сервером. В нём можно хранить некоторые пары «ключ-значение».
-Плюс, там есть ещё дополнительная информация об алгоритме, издателе, потребителе, сроке и т.д.
-Пользователь приходит к нам с логином и паролем. Если в системе такой юзер есть, то создаём JWT-токен.
-В нём мы можем записать, например, идентификатор сессии пользователя или имя пользователя. 
-Можно и больше записать, но не всегда это нужно. Юзер запоминает себе этот токен и дальше каким-либо образом передаёт нам его (например, в HTTP-заголовках).
-Пользователь пришёл к нам с токеном. Из токена мы достаём идентификатор сессии (или имя пользователя), при этом ещё проверили, что токен не протух, что он валидный и т.д.
-По этим данным строим identity/principal с claim'ами, которые уже нужны нам в приложении (например, роли пользователя) и отдаём из хендлера этот тикет.
-Тут может запутать то, что claim'ы в токене не обязательно совпадают с claim'ами пользователя (хотя и могут).
-     */
     public class LoginJWT: ILoginJWT
     {
         private readonly IAuthOptions _authOptions;

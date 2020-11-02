@@ -1,17 +1,14 @@
 using DeployTracker.Database;
 using DeployTracker.Handler;
 using DeployTracker.Options;
-using DeployTracker.Services;
 using DeployTracker.Services.Concrete;
 using DeployTracker.Services.Contracts;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.IdentityModel.Tokens;
 
 
 namespace DeployTracker

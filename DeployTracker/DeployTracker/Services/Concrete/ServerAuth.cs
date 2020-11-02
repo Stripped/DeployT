@@ -1,15 +1,8 @@
-﻿using DeployTracker.Database;
-using DeployTracker.Models;
+﻿using DeployTracker.Models;
 using DeployTracker.Services.Contracts;
 using Naos.WinRM;
 using Renci.SshNet;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Management.Automation.Runspaces;
 using System.Net;
-using System.Runtime.CompilerServices;
 using System.Security;
 using System.Threading.Tasks;
 

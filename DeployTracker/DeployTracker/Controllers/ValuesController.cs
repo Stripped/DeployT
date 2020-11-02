@@ -1,7 +1,4 @@
-﻿using DeployTracker.Models;
-using Microsoft.AspNetCore.Mvc;
-using DeployTracker.Services.Contracts;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DeployTracker.Controllers
